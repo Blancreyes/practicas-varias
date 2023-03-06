@@ -12,18 +12,63 @@
     />
     <link rel="shortcut icon" href="./4geeks.ico" />
   </head>
+
   <body>
     <div class="container-fluid text-center">
-      <h1 class="mt-5">Hello Rigo!</h1>
-      <img src="./rigo-baby.jpg" />
-      <p class="alert alert-warning mt-4">
-        If this text is <b>not</b> centered and <b>yellow</b>, you probably have
-        an error
-      </p>
-      <div class="fixed-bottom p-4">
-        Made with ❤️ by
-        <a href="https://www.4geeksacademy.com">4Geeks Academy</a>
-      </div>
+      <label for="name">Enter a name:</label>
+      <input type="text" id="name" />
+      <br />
+      <label for="nameWithoutVocals">Name without vowels:</label>
+      <input type="text" id="nameWithoutVocals" value="myFunction()" />
+      <br />
+      <br />
+      <hr />
+      <br />
+      <label for="date">Fecha</label>
+      <input type="date" id="date" name="date" />
+      <br />
+
+      <label for="days">Dias Transcurridos hasta el 10/03/2023 </label>
+      <input type="text" id="days" value disabled />
     </div>
+
+    <script>
+      const nameInput = document.getElementById("name");
+      const nameWithoutVocalsInput = document.getElementById(
+        "nameWithoutVocals"
+      );
+
+      nameInput.addEventListener("blur", myFunction);
+
+      function myFunction() {
+        const name = nameInput.value;
+        const vocals = "aeiouAEIOU";
+        let nameWithoutVocals = "";
+
+        for (let i = 0; i < name.length; i++) {
+          if (!vocals.includes(name[i])) {
+            nameWithoutVocals += name[i];
+          }
+        }
+
+        return nameWithoutVocals;
+
+        text.trim(nameWithoutVocalsInput.value) = nameWithoutVocals;
+      }
+
+      function calculateIntervalDays(fromDate, toDate = "10/03/2023") {
+        let fromDate = document.getElementById("date").value;
+        let date1 = new Date(str(fromDate));
+        let date2 = new Date(str(toDate));
+
+        const difference = Math.abs(date2 - date1);
+        const diffInDays = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+        return diffInDays;
+
+        document.getElementById("days").value.innerHTML = diffInDays;
+      }
+      console.log(diffInDays);
+    </script>
   </body>
 </html>
