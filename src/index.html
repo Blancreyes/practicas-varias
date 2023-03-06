@@ -19,7 +19,7 @@
       <input type="text" id="name" />
       <br />
       <label for="nameWithoutVocals">Name without vowels:</label>
-      <input type="text" id="nameWithoutVocals" value="myFunction()" />
+      <input type="text" id="nameWithoutVocals" value="" />
       <br />
       <br />
       <hr />
@@ -33,42 +33,48 @@
     </div>
 
     <script>
-      const nameInput = document.getElementById("name");
-      const nameWithoutVocalsInput = document.getElementById(
-        "nameWithoutVocals"
-      );
+      function handleInputName() {
+        let name = nameInput.value;
+        document.getElementById(
+          "nameWithoutVocals"
+        ).value = removeVocalsAndSpaces(name);
+      }
 
-      nameInput.addEventListener("blur", myFunction);
-
-      function myFunction() {
-        const name = nameInput.value;
-        const vocals = "aeiouAEIOU";
-        let nameWithoutVocals = "";
+      function removeVocalsAndSpaces(name) {
+        const vocals = " aeiouAEIOUáéíóúÁÉÍÓÚ";
+        let nameWithoutVocalsExit = "";
 
         for (let i = 0; i < name.length; i++) {
           if (!vocals.includes(name[i])) {
-            nameWithoutVocals += name[i];
+            nameWithoutVocalsExit += name[i];
           }
         }
 
-        return nameWithoutVocals;
-
-        text.trim(nameWithoutVocalsInput.value) = nameWithoutVocals;
+        return nameWithoutVocalsExit;
       }
 
       function calculateIntervalDays(fromDate, toDate = "10/03/2023") {
-        let fromDate = document.getElementById("date").value;
-        let date1 = new Date(str(fromDate));
-        let date2 = new Date(str(toDate));
+        let valores = toDate.split("/");
+        let date2 = valores[1] + "/" + valores[0] + "/" + valores[2];
 
-        const difference = Math.abs(date2 - date1);
-        const diffInDays = Math.floor(difference / (1000 * 60 * 60 * 24));
+        let difference = Math.ceil(
+          (new Date(date2) - new Date(fromDate)) / (1000 * 60 * 60 * 24)
+        );
 
-        return diffInDays;
-
-        document.getElementById("days").value.innerHTML = diffInDays;
+        return difference;
       }
-      console.log(diffInDays);
+
+      function handleInputDate() {
+        let date1 = startingDate.value;
+        document.getElementById("days").value = calculateIntervalDays(date1);
+      }
+
+      const nameInput = document.getElementById("name");
+
+      nameInput.addEventListener("blur", handleInputName);
+
+      const startingDate = document.getElementById("date");
+      startingDate.addEventListener("blur", handleInputDate);
     </script>
   </body>
 </html>
